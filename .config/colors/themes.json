@@ -1,0 +1,133 @@
+{
+    "index": 2,
+    "themes": [
+        {
+            "name": "dark",
+            "gtk-theme": "oomox-eboda",
+            "gtk-icons": "oomox-Base",
+            "color": [
+                "#3b3e44",
+                "#a63a3a",
+                "#849440",
+                "#de9f5f",
+                "#607d9e",
+                "#88678f",
+                "#5e8c8a",
+                "#80796f",
+                "#545a63",
+                "#cc7070",
+                "#bbbd68",
+                "#f0bc73",
+                "#82a8bf",
+                "#ae93ba",
+                "#8cbfb4",
+                "#c7c5c3"
+            ],
+            "map": {
+                "bg": 3,
+                "fg": 0,
+                "act": 4,
+                "brd": 6,
+                "txt": 6
+            },
+            "foreground": "#c7c5c3",
+            "background": "#211f1d"
+        },
+        {
+            "name": "light",
+            "gtk-theme": "oomox-Light",
+            "gtk-icons": "oomox-Light",
+            "color": [
+                "#090300",
+                "#db2d20",
+                "#01a252",
+                "#c3a955",
+                "#01a0e4",
+                "#c73088",
+                "#1f959d",
+                "#313030",
+                "#5c5855",
+                "#db2d20",
+                "#01a252",
+                "#c3a955",
+                "#01a0e4",
+                "#c73088",
+                "#1f959d",
+                "#313030"
+            ],
+            "map": {
+                "bg": 1,
+                "fg": 4,
+                "act": 8,
+                "brd": 4,
+                "txt": 0
+            },
+            "foreground": "#4a4543",
+            "background": "#dadada"
+        },
+        {
+            "name": "gruvbox",
+            "gtk-theme": "oomox-Gruvbox",
+            "gtk-icons": "oomox-Gruvbox",
+            "color": [
+                "#282828",
+                "#cc241d",
+                "#98971a",
+                "#d79921",
+                "#458588",
+                "#b16286",
+                "#689d6a",
+                "#a89984",
+                "#928374",
+                "#fb4934",
+                "#b8bb26",
+                "#fabd2f",
+                "#83a598",
+                "#d3869b",
+                "#8ec07c",
+                "#ebdbb2"
+            ],
+            "map": {
+                "bg": 1,
+                "fg": 4,
+                "act": 8,
+                "brd": 4,
+                "txt": 0
+            },
+            "foreground": "#ebdab4",
+            "background": "#32302f"
+        },
+        {
+            "name": "nord",
+            "gtk-theme": "oomox-Nord",
+            "gtk-icons": "oomox-Nord",
+            "color": [
+                "#434C5E",
+                "#bf616a",
+                "#a3be8c",
+                "#ebcb8b",
+                "#81a1c1",
+                "#b48ead",
+                "#8fbcbb",
+                "#d8dee9",
+                "#929cb2",
+                "#d08770",
+                "#a3be8c",
+                "#ebcb8b",
+                "#88c0d0",
+                "#b48ead",
+                "#a5d2d1",
+                "#e5e9f0"
+            ],
+            "map": {
+                "bg": 1,
+                "fg": 7,
+                "act": 8,
+                "brd": 4,
+                "txt": 0
+            },
+            "foreground": "#d8dee9",
+            "background": "#2e3440"
+        }
+    ]
+}

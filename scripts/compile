@@ -1,0 +1,21 @@
+#! /bin/sh
+
+dir=`pwd`
+
+for fname in $@; do
+	#fname="$1"
+
+	pcompile $fname
+
+	fname=${fname::-2}
+
+	if [ ! -d "$dir/out"  ]; then
+		mkdir "$dir/out" 
+	fi
+
+	mv "$dir/$fname.hex" "$dir/out/$fname.hex"
+done
+
+rm *.map
+rm *.elf
+rm *.o

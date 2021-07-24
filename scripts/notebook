@@ -1,0 +1,73 @@
+#!/usr/bin/env python3
+
+import os
+import sys
+import json
+
+from datetime import date
+
+"""
+The config should look like this:
+{
+    "year": <year>,
+    "semester": <semester>,
+    "classes": {
+        "abreviation": "full name",
+        ...
+    }
+}
+"""
+
+if len(sys.argv) < 2:
+    sys.exit("Syntax error: notebook <subject> [summary]")
+
+subject = sys.argv[1]
+title = ""
+if len(sys.argv) > 2:
+    title = f"-{'-'.join(sys.argv[2:])}"
+
+home = os.path.expanduser("~")
+cfg = f"{home}/.config/notebook/config.json"
+with open(cfg, 'r') as f:
+    config = json.load(f)
+
+if subject not in config["classes"]:
+    sys.exit("Input error: not a valid subject. Add it to the config if this is a valid subject")
+
+year = config["year"]
+semester = config["semester"]
+full_name = config["classes"][subject]
+
+docs = f"{home}/Documents/uni/Ano{year}-Sem{semester}/{subject.upper()}/apontamentos/"
+
+if not os.path.isdir(docs):
+    os.makedirs(docs)
+
+lesson_number = len([v for v in os.listdir(docs) if (not v.startswith('.') and v.endswith('.md'))]) + 1
+
+today = date.today()
+# <#class>-<class>-<date>-<title>
+doc_title = title
+title = f"{lesson_number}-{subject.upper()}-{today.strftime('%d_%m_%Y')}{title}.md"
+
+metadata = f"{home}/.config/notebook/metadata.yml"
+#doc_title = f"Aula {lesson_number}"
+#if
+
+with open(metadata, 'r') as f:
+    #metadata = f.read().format(
+    #        title = doc_title[1:] if doc_title != '' else f"Apontamentos de {full_name}",
+    #        sub = f"{full_name} aula {lesson_number}",
+    #        date = today.strftime('%d-%m-%Y'))
+    
+    i_title = doc_title[1:] if doc_title != '' else f"Apontamentos de {full_name}"
+    sub = f"{full_name}, aula {lesson_number}"
+    date = today.strftime('%d-%m-%Y')
+
+    metadata = f.read()
+    metadata = metadata.replace('{title}', i_title.replace('-', ' ')).replace('{date}', date).replace('{sub}', sub)
+
+with open(docs+title, 'w') as f:
+    f.write(f"---\n{metadata}\n---\n\n")
+
+print(f"Created {title}")

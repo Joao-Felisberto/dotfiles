@@ -1,0 +1,93 @@
+#!/usr/bin/env python3
+
+import subprocess
+import json
+import os
+
+from datetime import datetime
+
+
+weekdays = ("seg", "ter", "qua", "qui", "sex", "sab", "dom")
+
+class CfgDate:
+    @staticmethod
+    def from_cfg(cfg_str):
+        """ <weekday_str> <start_time> <end_time>"""
+        
+        parsed = cfg_str.split()
+        start = parsed[1].split(':')
+        end = parsed[2].split(':')
+        
+        day = -1
+        for d in range(len(weekdays)):
+            if weekdays[d] == parsed[0]:
+                day = d
+                break
+
+        return (CfgDate(d, start[0],   start[1]),
+                CfgDate(d, end[0],     end[1]))
+
+    def __init__(self, week_day, h, m):
+        self.week_day = int(week_day)
+        self.h = int(h)
+        self.m = int(m)
+
+    def __gt__(self, other):
+        """self > other"""
+        if not (self.week_day == other.week_day):
+            #print("d")
+            return self.week_day > other.week_day
+        elif not (self.h == other.h):
+            #print("h")
+            #print(self.h > other.h)
+            return self.h > other.h
+        else:
+            #print("m")
+            return self.m > other.m
+
+    def __lt__(self, other):
+        if not (self.week_day == other.week_day):
+            #print("d")
+            return self.week_day < other.week_day
+        elif not (self.h == other.h):
+            #print("h")
+            #print(self.h < other.h)
+            return self.h < other.h
+        else:
+            #print("m")
+            return self.m < other.m
+
+    def __eq__(self, other):
+        return (self.week_day == other.week_day) and (self.h == other.h) and (self.m == other.m)
+
+    def __le__(self, other):
+        return not (self > other)
+
+    def __ge__(self, other):
+        return not (self < other)
+
+    def __str__(self):
+        return weekdays[self.week_day] + " " + str(self.h) + ":" + str(self.m)
+
+
+home = os.path.expanduser("~")
+cfg = f"{home}/.config/zoom/meetings.json"
+
+with open(cfg, 'r') as f:
+    meets = json.load(f)
+
+
+today = datetime.today()
+today = CfgDate(today.weekday(), today.hour, today.minute)
+
+#print(today)
+for meet in meets:
+    dates = CfgDate.from_cfg(meet["time"])
+    
+    #print(str(dates[0]) + "\t" + str(dates[1]))
+    #print(str(today >= dates[0]) + "\t" + str(today < dates[1]))
+    if today >= dates[0] and today < dates[1]:
+        #print("succ")
+        subprocess.Popen(f"xdg-open {meet['link']}".split())
+        break
+    #print('\n')

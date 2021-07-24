@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+# brightness <-l | -m <value>>
+# -l --load     restores brightness from file
+# -m -modify    adds value to brightness and saves to file
+# (no args)     outputs the current 
+
+f="$HOME/.config/brightness/dat"
+if [ ! -f "$f" ]; then
+    mkdir -p "$HOME/.config/brightness"
+    touch "$f"
+    echo 0.5 > "$f"
+fi
+
+
+if [ $# -lt 1 ]; then
+    echo "wrong usage: brightness <-l | -m <value>>"
+    exit
+fi
+
+b=`cat "$f"`
+
+if [ $1 == "-l" ]; then
+    xrandr --output eDP-1 --brightness $b
+    exit
+fi
+
+if [ $1 == "-m" -a $# -ge 2 ]; then
+    b=$(echo "print(int(($b + $2)*100))" | python3)
+
+    if [ $b -gt 100 ]; then
+        b=100
+    fi
+    
+    if [ $b -lt 0 ]; then
+        b=0
+    fi
+
+    b=$(echo "print($b / 100)" | python3)
+
+    xrandr --output eDP-1 --brightness $b
+    echo $b > "$f" 
+    
+    exit
+fi
+
+echo "wrong usage: brightness <-l | -m <value>>"

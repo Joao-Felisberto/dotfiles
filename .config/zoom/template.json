@@ -1,0 +1,6 @@
+[
+	{
+		"time": "<seg|ter|qua|qui|sex|sab|dom> <h-start>:<m-start> <h-end>:<m-end>",
+		"link": "<link>"
+	}
+]

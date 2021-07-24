@@ -1,0 +1,8 @@
+{
+    "year": 1,
+    "semester": 1,
+    "classes": {
+        "acronym1": "Name of the class 1",
+        "acronym2": "Name of the class 2"
+    }
+}
