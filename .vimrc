@@ -14,9 +14,16 @@ set scrolloff=999
 
 filetype plugin on
 
+set autoindent
+set smartindent
+
 set tabstop=4
 set shiftwidth=4
 " set expandtab " converts tabs into spaces
+
+set incsearch
+
+set wildmenu
 
 " For easy movement in file
 "inoremap <C-e> <C-o>$
