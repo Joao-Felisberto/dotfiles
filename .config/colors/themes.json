@@ -28,7 +28,7 @@
                 "fg": 0,
                 "act": 4,
                 "brd": 6,
-                "txt": 6
+                "txt": 0
             },
             "foreground": "#c7c5c3",
             "background": "#211f1d"
@@ -128,6 +128,38 @@
             },
             "foreground": "#d8dee9",
             "background": "#2e3440"
+        },
+        {
+            "name": "aurora",
+            "gtk-theme": "oomox-Nord",
+            "gtk-icons": "oomox-Nord",
+            "color": [
+                "#232940",
+                "#fe516d",
+                "#555f4f",
+                "#8d855c",
+                "#3c496b",
+                "#f4848e",
+                "#656aa4",
+                "#bda0a0",
+                "#2f3650",
+                "#ff708b",
+                "#b1bda9",
+                "#bba795",
+                "#727fa9",
+                "#edbacb",
+                "#9395bb",
+                "#f5dddd"
+            ],
+            "map": {
+                "bg": 3,
+                "fg": 0,
+                "act": 5,
+                "brd": 5,
+                "txt": 0
+            },
+            "foreground": "#dbbbbb",
+            "background": "#121f30"
         }
     ]
 }
