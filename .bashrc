@@ -26,7 +26,12 @@ dpic ()
 	sudo ldpic32 "out/98003_${1::-2}.hex" && sudo pterm
 }
 
-alias h='history | grep'
+hist ()
+{
+	history | grep $1 | awk '{$1=""; gsub(/^ /, "", $0); print $0}'
+}
+#alias h="cat /home/$USER/.bash_history | grep"
+alias h='hist'
 alias ls='ls --color=auto'
 alias free='free -h'
 
