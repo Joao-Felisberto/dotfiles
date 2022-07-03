@@ -2,12 +2,12 @@
  * Author: Primetoxinz
  */
 * {
-    text-color:                  #f2f2f2;
-    background-color:            #4e4743;
-    lightbg:                     #534c48;
-    red:                         #f15d22;
-    orange:                      #faa41a; 
-    blue:                        #48b9c7; 
+text-color:                  #ebdab4;
+background-color:            #32302f;
+lightbg:                     #ebdab4;
+red:                         #fabd2f;
+orange:                      #689d6a;
+blue:                        #928374;
 
     selected-normal-foreground:  @foreground;
     normal-foreground:           @foreground;
@@ -19,7 +19,7 @@
     selected-active-foreground:  @foreground;
     alternate-normal-foreground: @foreground;
     alternate-active-background: @blue;
-    bordercolor:                 @foreground;
+    bordercolor:                 @blue;/*@foreground;*/
     normal-background:           @background;
     selected-normal-background:  @blue;
     separatorcolor:              @orange;
@@ -31,110 +31,94 @@
     selected-active-background:  @blue;
     active-background:           @orange;
 }
-window {
-    border:     0;
+#window {
+    border:     3;
     text-color: @foreground;
-    background-color: rgba ( 0, 0, 0, 0 % );
+    background-color: #ff0000; /*rgba ( 0, 0, 0, 0 % );*/
     padding:    5;
     text-color: @bordercolor;
     background-color: @background;
+    border-color: @blue;
 }
-mainbox {
+#mainbox {
     border:  0;
     padding: 0;
 }
-message {
+#message {
     border:     1px dash 0px 0px ;
     text-color: @separatorcolor;
     padding:    2px 0px 0px ;
 }
-textbox {
+#textbox {
     text-color: @foreground;
 }
-listview {
+#listview {
     fixed-height: 0;
     border:       2px 0px 0px ;
     padding:      2px 0px 0px ;
     text-color: @separatorcolor;
-	lines: 5;
 }
-element {
+#element {
     border: 0;
-	padding: 20;
 }
-element-text {
-    background-color: inherit;
-    text-color:       inherit;
-}
-element.normal.normal {
+#element.normal.normal {
     text-color: @normal-foreground;
     background-color: @normal-background;
 }
-element.normal.urgent {
+#element.normal.urgent {
     text-color: @urgent-foreground;
     background-color: @urgent-background;
 }
-element.normal.active {
+#element.normal.active {
     text-color: @active-foreground;
     background-color: @active-background;
 }
-element.selected.normal {
-    text-color: @selected-normal-foreground;
+#element.selected.normal {
+    text-color: @background-color;/*@selected-normal-foreground;<----*/
     background-color: @selected-normal-background;
 }
-element.selected.urgent {
-    text-color: @selected-urgent-foreground;
+#element.selected.urgent {
+    /*text-color: @selected-urgent-foreground;*/
     background-color: @selected-urgent-background;
 }
-element.selected.active {
-    text-color: @selected-active-foreground;
+#element.selected.active {
+    text-color: @background;/*@selected-active-foreground;*/
     background-color: @selected-active-background;
 }
-element.alternate.normal {
+#element.alternate.normal {
     text-color: @alternate-normal-foreground;
     background-color: @alternate-normal-background;
 }
-element.alternate.urgent {
+#element.alternate.urgent {
     text-color: @alternate-urgent-foreground;
     background-color: @alternate-urgent-background;
 }
-element.alternate.active {
-    text-color: @alternate-active-foreground;
+#element.alternate.active {
+    text-color: @background;/*@alternate-active-foreground;*/
     background-color: @alternate-active-background;
 }
-mode-switcher {
+#mode-switcher {
     border: 1px dash 0px 0px ;
 }
-button selected {
-    text-color: @selected-normal-foreground;
+#button selected {
+    /*text-color: @selected-normal-foreground;*/
     background-color: @selected-normal-background;
 }
-inputbar {
+#inputbar {
     spacing: 0;
     border: 0px ;
 }
-button normal {
+/*
+#button normal {
     text-color: @foreground;
 }
-
-inputbar {
+*/
+#inputbar {
     children:   [ prompt,textbox-prompt-colon,entry,case-indicator ];
 }
-textbox-prompt-colon {
+#textbox-prompt-colon {
     expand:     false;
     str:        ":";
     margin:     0px 0.3em 0em 0em ;
     text-color: @normal-foreground;
-}
-/*
-configuration {
-	font: "SourceCodePro 18";
-}
-*/
-element-icon { 
-	size: 50px; 
-}
-configuration {
-	font: "SourceCodePro 18";
-	/*show-icons: true;*/
 }

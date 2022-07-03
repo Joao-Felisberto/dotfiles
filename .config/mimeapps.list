@@ -1,11 +1,18 @@
 [Added Associations]
 text/markdown=vim.desktop;Alacritty.desktop;
 text/plain=vim.desktop;userapp-"vim"-UGE7Y0.desktop;
-application/pdf=firefox.desktop;libreoffice-impress.desktop;userapp-zathura-VPLA00.desktop;userapp-zathura-K7H4Z0.desktop;userapp-zathura-NJEXZ0.desktop;org.pwmt.zathura.desktop;vim.desktop;
+application/pdf=firefox.desktop;brave-browser.desktop;libreoffice-impress.desktop;userapp-zathura-VPLA00.desktop;userapp-zathura-K7H4Z0.desktop;userapp-zathura-NJEXZ0.desktop;org.pwmt.zathura.desktop;vim.desktop;
 text/x-csrc=userapp-"alacritty -e vim"-DFDB00.desktop;userapp-""vim $0""-4AYCZ0.desktop;userapp-"alacritty -e vim"-K7HUZ0.desktop;
 application/x-trash=vim.desktop;
+text/x-python=vim.desktop;
+application/octet-stream=vim.desktop;
 
 [Default Applications]
 text/x-csrc=userapp-"alacritty -e vim"-K7HUZ0.desktop
 application/pdf=org.pwmt.zathura.desktop
 text/markdown=vim.desktop
+text/html=brave-browser.desktop
+x-scheme-handler/http=brave-browser.desktop
+x-scheme-handler/https=brave-browser.desktop
+x-scheme-handler/about=brave-browser.desktop
+x-scheme-handler/unknown=brave-browser.desktop

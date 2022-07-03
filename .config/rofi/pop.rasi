@@ -126,15 +126,6 @@ textbox-prompt-colon {
     margin:     0px 0.3em 0em 0em ;
     text-color: @normal-foreground;
 }
-/*
 configuration {
-	font: "SourceCodePro 18";
-}
-*/
-element-icon { 
-	size: 50px; 
-}
-configuration {
-	font: "SourceCodePro 18";
-	/*show-icons: true;*/
+	font: "mono 18";
 }

@@ -5,6 +5,7 @@
             "name": "dark",
             "gtk-theme": "oomox-eboda",
             "gtk-icons": "oomox-Base",
+            "vim-theme": "colorscheme elflord",
             "color": [
                 "#3b3e44",
                 "#a63a3a",
@@ -37,6 +38,7 @@
             "name": "light",
             "gtk-theme": "oomox-Light",
             "gtk-icons": "oomox-Light",
+            "vim-theme": "colorscheme PaperColor",
             "color": [
                 "#090300",
                 "#db2d20",
@@ -69,6 +71,7 @@
             "name": "gruvbox",
             "gtk-theme": "oomox-Gruvbox",
             "gtk-icons": "oomox-Gruvbox",
+            "vim-theme": "set background=dark\nlet g:gruvbox_contrast_dark = 'medium'\ncolorscheme gruvbox",
             "color": [
                 "#282828",
                 "#cc241d",
@@ -101,6 +104,7 @@
             "name": "nord",
             "gtk-theme": "oomox-Nord",
             "gtk-icons": "oomox-Nord",
+            "vim-theme": "colorscheme nord",
             "color": [
                 "#434C5E",
                 "#bf616a",
@@ -131,8 +135,9 @@
         },
         {
             "name": "aurora",
-            "gtk-theme": "oomox-Nord",
-            "gtk-icons": "oomox-Nord",
+            "gtk-theme": "oomox-Amora",
+            "gtk-icons": "oomox-Amora",
+            "vim-theme": "colorscheme elflord",
             "color": [
                 "#232940",
                 "#fe516d",

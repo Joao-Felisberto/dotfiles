@@ -1,5 +1,8 @@
 font:
-  size: 13
+  size: 12
+  normal:
+    family: SourceCodePro
+    style: Medium
 
 colors:
   # Default colors

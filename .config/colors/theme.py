@@ -1,5 +1,6 @@
-import json
 import os
+import sys
+import json
 import re
 import subprocess
 
@@ -27,8 +28,19 @@ class ThemeManager:
         #return themes[index]
         return index, themes
 
+    def choose_theme(self):
+        _, themes = self.get_theme()
+
+        names = "\\n".join([t['name'] for t in themes]) 
+        print(names)
+        
+        choice = os.popen(f"printf '{names}' | rofi -show drun -dmenu -theme mine").read()[:-1]
+        print(f"You chose {choice}")
+
+        self.change_theme(name=choice)
 
     def change_theme(self, name=None, update=False):
+        print("Next theme", name)
         with open(theme_f, 'r') as f:
             json_data = json.load(f)
             index = json_data["index"]
@@ -82,6 +94,10 @@ class ThemeManager:
         self.update_gtk(
                 theme["gtk-theme"], 
                 theme["gtk-icons"]
+                )
+        
+        self.update_vim(
+                theme["vim-theme"] 
                 )
 
         # MUST BE LAST because it's here where i3 is updated
@@ -227,41 +243,44 @@ class ThemeManager:
 
 
     def update_gtk(self, themen, icons):
-        f_dir = f"{home}/.config/gtk-3.0/settings.template"
-
+        f_dir = f"{home}/.config/xsettingsd/template.conf"
+        
         with open(f_dir, 'r') as f:
-            f_str = "".join(f.readlines())
+            f_str = f.read()
 
         f_str = f_str.format(gtk_theme=themen, gtk_icons=icons)
+        
+        with open(f"{home}/.config/xsettingsd/xsettingsd.conf", 'w') as f:
+            f.write(f_str)
 
-        with open(f"{home}/.config/gtk-3.0/settings.ini", 'w') as gtk:
-            gtk.write(f_str)
+        os.system("killall -HUP xsettingsd")
+        return f_str
+#        f_dir = f"{home}/.config/gtk-3.0/settings.template"
+#
+#        with open(f_dir, 'r') as f:
+#            f_str = "".join(f.readlines())
+#
+#        f_str = f_str.format(gtk_theme=themen, gtk_icons=icons)
+#
+#        with open(f"{home}/.config/gtk-3.0/settings.ini", 'w') as gtk:
+#            gtk.write(f_str)
+#
+#        return f_str
+
+
+    def update_vim(self, vim_theme):
+        f_dir = f"{home}/.config/vim/vimrc"
+
+        with open(f_dir, 'r') as f:
+            f_str = f.read()
+
+        f_str = f_str.format(theme=vim_theme)
+
+        with open(f"{home}/.vimrc", 'w') as zath:
+            zath.write(f_str)
 
         return f_str
-
-#    def convert_pywal(self):
-#        with open("~/.cache/wal/colors.json", 'r') as wal:
-#            origin = json.load(wal)
-#
-#        colors = list(origin["colors"].values())
-#
-#        # name color foreground background
-#        theme = {"name": origin["wallpaper"], "color": colors,
-#                "foreground": origin["special"]["foreground"],
-#                "background": origin["special"]["background"]}
-#        
-#        with open("/home/me/.config/qtile/themes.json", 'r') as f:
-#            json_data = json.load(f)
-#            themes = json_data["themes"]
-#        
-#        if theme in themes:
-#            return
-#
-#        themes.append(theme)
-#        json_data["themes"] = themes
-#        
-#        with open("/home/me/.config/qtile/themes.json", 'w') as f1:
-#            json.dump(json_data, f1, indent=4)
+        
 
 def hex_to_rgb(value):
     value = value[1:]

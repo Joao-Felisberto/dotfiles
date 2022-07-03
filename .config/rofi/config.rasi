@@ -2,27 +2,41 @@
 https://github.com/davatorium/rofi/blob/next/doc/rofi-theme.5.markdown
 */
 
+
 configuration {
 	modi: "drun";
 	drun-match-fields: "name";
+	active-foreground:           @foreground;
 }
 
 element-text, element-icon {
-	background-color: inherit;
-	text-color:       inherit;
+	background-color: @background;
+	text-color:       #FF0000;
 }
 
 window {
 	border: 3;
-	border-color: #ff0000;
+	border-color: @blue;
+	text-color: @bordercolor;
+	background-color: @background;
 }
 
 listview {
 	lines: 5;
 	padding: 5;
+	text-color: @separatorcolor;
 }
 
 element {
 	padding: 20;
+	border: 0;
 }
 
+* {
+	text-color:                  #d8dee9;
+	background-color:            #2e3440;
+	lightbg:                     #d8dee9;
+	red:                         #ebcb8b;
+	orange:                      #8fbcbb;
+	blue:                        #929cb2;
+}

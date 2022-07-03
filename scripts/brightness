@@ -20,8 +20,13 @@ fi
 
 b=`cat "$f"`
 
+device="eDP-1"
+if [ "$(uname -a | awk '{print $2}')" = "pop-os" ]; then
+	device="eDP-1-1"
+fi
+
 if [ $1 == "-l" ]; then
-    xrandr --output eDP-1 --brightness $b
+    xrandr --output $device --brightness $b
     exit
 fi
 
@@ -38,7 +43,7 @@ if [ $1 == "-m" -a $# -ge 2 ]; then
 
     b=$(echo "print($b / 100)" | python3)
 
-    xrandr --output eDP-1 --brightness $b
+    xrandr --output $device --brightness $b
     echo $b > "$f" 
     
     exit

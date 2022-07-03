@@ -28,12 +28,14 @@ dpic ()
 
 hist ()
 {
-	history | grep $1 | awk '{$1=""; gsub(/^ /, "", $0); print $0}'
+	history | awk '{$1=""; gsub(/^ /, "", $0); print $0}'| grep $1 | head -n-1
 }
 #alias h="cat /home/$USER/.bash_history | grep"
 alias h='hist'
 alias ls='ls --color=auto'
 alias free='free -h'
+
+alias less='less -R'
 
 alias hotp='htop'
 
@@ -42,14 +44,25 @@ alias nb='notebook'
 alias py='python3'
 alias python='python3'
 
+alias com='git commit -S -m'
+
+alias yt='yt-dlp'
+
+alias got='git'
+alias çs='ls'
+
+alias ploudos='sudo wg-quick up wg0'
+
 alias term='echo "cd $(pwd)" | ($TERM & disown) > /dev/null'
+alias ssh='TERM=xterm-256color ssh'
+
 alias theme='python3 $HOME/.config/colors/test.py'
 
 alias sus='su'
 
 aula ()
 {
-	cd "$HOME/Documents/uni/Ano2-Sem2/${1^^}/apontamentos/"
+	cd "$HOME/Documents/uni/32/${1^^}/apontamentos/"
 }
 alias a='aula'
 
@@ -57,6 +70,29 @@ nbedit ()
 {
 	vim $1
 	pandoc --toc "$1" -so "pdf/${1::-3}.pdf"
+}
+
+venv ()
+{
+	if [ -d venv ]; then 
+		prompt="\n(venv) ${PS1:2}"
+		source venv/bin/activate
+	elif [ -d .venv ]; then
+		prompt="\n(.venv) ${PS1:2}"
+		source .venv/bin/activate 
+	else
+		read -p "No virtual environment detected. Make a new one? [Y|n]: " yn
+		if [ "$yn" != "n" ]; then
+			python3 -m venv .venv
+			prompt="\n(.venv) ${PS1:2}"
+			source .venv/bin/activate 
+			[ -f requirements.txt ] && 
+				pip3 install -r requirements.txt ||
+			 	echo "No requirements.txt, skipping installing dependencies"
+		fi
+	fi
+
+	export PS1=$prompt
 }
 
 export HISTCONTROL="ignoredups"
@@ -72,7 +108,10 @@ export PS1="\n\[\033[36m\]\W$a\[\033[00m\] " # ❯❱➤
 export PATH="/home/me/scripts:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/me/Documents/uni/Ano2-Sem2/AC2/software/pic32mx/bin/"
 
 #export ANTLR4_PATH="/usr/local/lib"
-#export CLASSPATH=".:/usr/local/lib/antlr-4.9.2-complete.jar:/usr/local/lib/ST-4.3.1.jar:"
+export CLASSPATH=".:/usr/local/lib/antlr-4.9.2-complete.jar:/usr/local/lib/ST-4.3.1.jar:"
+
+alias antlr4='java -Xmx500M -cp "/usr/local/lib/antlr-4.9-complete.jar:$CLASSPATH" org.antlr.v4.Tool'
+alias grun='java -Xmx500M -cp "/usr/local/lib/antlr-4.9-complete.jar:$CLASSPATH" org.antlr.v4.gui.TestRig'
 
 # From the Arco Linux .bashrc
 decomp () {
@@ -99,7 +138,8 @@ decomp () {
             *.Z)
                 echo "missing uncompress";;
             *.7z)
-                echo "missing 7z";;
+				7z e $1;;
+                # echo "missing p7zip";;
             *.deb)
                 echo "missing ar";;
             *.tar.xz)
@@ -115,3 +155,13 @@ decomp () {
 }
 export CLASSPATH=".:/usr/local/lib/antlr-4.9.2-complete.jar:/usr/local/lib/ST-4.3.1.jar:.:/usr/local/lib/antlr-4.9.2-complete.jar:/usr/local/lib/ST-4.3.1.jar:"
 export ANTLR4_PATH="/usr/local/lib"
+
+export QT_QPA_PLATFORMTHEME=gtk2
+#export QT_QPA_PLATFORMTHEME=qt6gtk2
+
+export GPG_TTY=$(tty)
+export CLASSPATH=".:/usr/local/lib/antlr-4.9.2-complete.jar:/usr/local/lib/ST-4.3.1.jar:.:/usr/local/lib/antlr-4.9.2-complete.jar:/usr/local/lib/ST-4.3.1.jar:.:/usr/local/lib/antlr-4.9.2-complete.jar:/usr/local/lib/ST-4.3.1.jar:"
+export ANTLR4_PATH="/usr/local/lib"
+
+export PATH="$PATH:/home/me/.flutter/flutter/bin"
+. "$HOME/.cargo/env"

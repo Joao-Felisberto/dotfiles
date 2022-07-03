@@ -38,7 +38,7 @@ year = config["year"]
 semester = config["semester"]
 full_name = config["classes"][subject]
 
-docs = f"{home}/Documents/uni/Ano{year}-Sem{semester}/{subject.upper()}/apontamentos/"
+docs = f"{home}/Documents/uni/{year}{semester}/{subject.upper()}/apontamentos/"
 
 if not os.path.isdir(docs):
     os.makedirs(docs)

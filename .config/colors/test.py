@@ -13,6 +13,10 @@ if len(sys.argv) == 1:
     tm.change_theme(update=True)
     sys.exit()
 
+if sys.argv[1] == '-c':
+    tm.choose_theme()
+    sys.exit()
+
 if sys.argv[1] == '-n':
     tm.change_theme()
     sys.exit()

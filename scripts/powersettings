@@ -1,0 +1,24 @@
+#!/bin/sh
+
+Locker="i3lock && sleep 1"
+opts="shutdown\nreboot\nsleep\nlock"
+
+sel=$(printf "$opts" | rofi -show drun -dmenu -theme mine)
+
+case $sel in
+"shutdown")
+	systemctl poweroff;;
+"reboot")
+	systemctl reboot;;
+"sleep")
+	$Locker && systemctl suspend;;
+"lock")
+	$Locker;;
+esac
+
+#    bindsym l exec --no-startup-id $Locker, mode "default"
+#    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+#    bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
+#    bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
+#    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+#    bindsym Escape  exec --no-startup-id systemctl poweroff -i, mode "default"  
