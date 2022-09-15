@@ -1,2 +1,2 @@
-#\!/bin/sh
+#!/bin/sh
 sh /opt/FreeTube/freetube
