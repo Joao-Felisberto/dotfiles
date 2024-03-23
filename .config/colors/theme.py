@@ -170,14 +170,14 @@ class ThemeManager:
 
 
     def update_alacritty(self, background, foreground, colors):
-        f_dir = f"{home}/.config/alacritty/template.yml"
+        f_dir = f"{home}/.config/alacritty/template.toml"
 
         with open(f_dir, 'r') as f:
             f_str = "".join(f.readlines())
 
         f_str = f_str.format(bg=background, fg=foreground, cols=colors)
 
-        with open(f"{home}/.config/alacritty/alacritty.yml", 'w') as alac:
+        with open(f"{home}/.config/alacritty/alacritty.toml", 'w') as alac:
             alac.write(f_str)
 
         return f_str

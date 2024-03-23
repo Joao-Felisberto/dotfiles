@@ -3,3 +3,4 @@ text/plain=`vim.desktop`
 application/pdf=`zathura.desktop`
 image/png=`feh.desktop`
 image/jpeg=`feh.desktop`
+image/jpg=`feh.desktop`

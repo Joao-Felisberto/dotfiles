@@ -1,4 +1,4 @@
-colorscheme elflord
+colorscheme PaperColor
 
 set nu rnu
 

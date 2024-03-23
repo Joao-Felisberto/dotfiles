@@ -1,5 +1,5 @@
 [Configuration]
-LastActiveMode=THUNAR_RENAMER_MODE_NAME
+LastActiveMode=THUNAR_RENAMER_MODE_BOTH
 LastActiveRenamer=ThunarSbrReplaceRenamer
 
 [ThunarSbrNumberRenamer]
@@ -22,7 +22,7 @@ OffsetMode=THUNAR_SBR_OFFSET_MODE_LEFT
 
 [ThunarSbrReplaceRenamer]
 CaseSensitive=FALSE
-Replacement=_
-Pattern=\ 
+Replacement=
+Pattern=\\)
 Regexp=TRUE
 

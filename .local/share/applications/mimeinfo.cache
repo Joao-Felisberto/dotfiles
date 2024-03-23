@@ -1,6 +1,5 @@
 [MIME Cache]
 application/pdf=zathura.desktop;
 image/*=feh.desktop;
-image/png=feh.desktop;
-image/jpeg=feh.desktop;
 text/plain=vim.desktop;
+x-scheme-handler/jetbrains=jetbrains-toolbox.desktop;
