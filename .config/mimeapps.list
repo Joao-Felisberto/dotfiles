@@ -1,21 +1,25 @@
 [Added Associations]
 text/markdown=vim.desktop;Alacritty.desktop;
-text/plain=vim.desktop;libreoffice-calc.desktop;userapp-"vim"-UGE7Y0.desktop;
-application/pdf=brave-browser.desktop;firefox.desktop;libreoffice-impress.desktop;userapp-zathura-VPLA00.desktop;userapp-zathura-K7H4Z0.desktop;userapp-zathura-NJEXZ0.desktop;org.pwmt.zathura.desktop;vim.desktop;
+text/plain=codium.desktop;vim.desktop;libreoffice-calc.desktop;userapp-"vim"-UGE7Y0.desktop;
+application/pdf=firefox.desktop;brave-browser.desktop;libreoffice-impress.desktop;userapp-zathura-VPLA00.desktop;userapp-zathura-K7H4Z0.desktop;userapp-zathura-NJEXZ0.desktop;org.pwmt.zathura.desktop;vim.desktop;
 text/x-csrc=vim.desktop;userapp-"alacritty -e vim"-DFDB00.desktop;userapp-""vim $0""-4AYCZ0.desktop;userapp-"alacritty -e vim"-K7HUZ0.desktop;
 application/x-trash=vim.desktop;
 text/x-python=vim.desktop;
 application/octet-stream=vim.desktop;
-text/html=vim.desktop;firefox.desktop;
+text/html=codium.desktop;vim.desktop;firefox.desktop;
 image/webp=gimp.desktop;
 inode/directory=codium.desktop;pycharm-professional.desktop;
 text/x-java=vim.desktop;
 image/jpeg=feh.desktop;
-video/mp4=brave-browser.desktop;mpv.desktop;feh.desktop;
+video/mp4=mpv.desktop;brave-browser.desktop;feh.desktop;
 application/x-shellscript=vim.desktop;
 image/png=brave-browser.desktop;mpv.desktop;
-application/json=codium.desktop;
+application/json=codium.desktop;vim.desktop;
 text/x-makefile=vim.desktop;
+text/x-tex=codium.desktop;
+image/svg+xml=gimp.desktop;
+application/x-ipynb+json=codium.desktop;
+text/x-bibtex=codium.desktop;
 
 [Default Applications]
 text/x-csrc=userapp-"alacritty -e vim"-K7HUZ0.desktop

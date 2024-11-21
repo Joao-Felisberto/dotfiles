@@ -58,6 +58,8 @@ alias ssh='TERM=xterm-256color ssh'
 
 alias theme='python3 $HOME/.config/colors/test.py'
 
+alias z='zathura -c /dev/null'
+
 alias sus='su'
 alias :wq='exit'
 alias :q='exit'
