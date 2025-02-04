@@ -1,0 +1,22 @@
+{
+	"black": "#111317",
+	"red": "#F8747E",
+	"green": "#75AD47",
+	"yellow": "#D09214",
+	"blue": "#50A4E9",
+	"magenta": "#CC83E3",
+	"cyan": "#00B298",
+	"white": "#ADB0BB",
+	"d_black":    "#576176",
+	"d_red":      "#FAA5AB",
+	"d_green":    "#A5CD84",
+	"d_yellow":   "#EFBD58",
+	"d_blue":     "#8DC3F1",
+	"d_magenta":  "#DEAEED",
+	"d_cyan":     "#27FFDF",
+	"d_white":    "#CACCD3",
+	"bg":"#111317",
+	"fg":"#CACCD3",
+	"gtk_theme": "Adwaita-dark",
+	"light_theme": false
+}

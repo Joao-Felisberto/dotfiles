@@ -1,0 +1,180 @@
+#!/usr/bin/env python3
+
+import os
+import sys
+import json
+import array
+import getpass
+import subprocess
+
+from pathlib import Path
+from string import Template
+
+USER = getpass.getuser()
+COLORS = (
+    "black",
+    "red",
+    "green",
+    "yellow",
+    "blue",
+    "magenta",
+    "cyan",
+    "white",
+    "d_black",
+    "d_red",
+    "d_green",
+    "d_yellow",
+    "d_blue",
+    "d_magenta",
+    "d_cyan",
+    "d_white",
+    "bg",
+    "fg",
+)
+CFG_KEYS = (
+    *COLORS,
+    "gtk_theme",
+    "light_theme",
+)
+
+ALT_FORMAT_FILES = (
+    f"/home/{USER}/.config/hypr/hyprland.conf",
+)
+
+def hex_to_rgb(hex_color: str) -> (int, int, int):
+    if not isinstance(hex_color, str):
+        return hex_color
+
+    if hex_color.startswith('#'):
+        hex_color = hex_color[1:]
+    else:
+        return hex_color
+
+    if len(hex_color) == 3:
+        hex_color = ''.join([c * 2 for c in hex_color])
+
+    r = int(hex_color[0:2], 16)
+    g = int(hex_color[2:4], 16)
+    b = int(hex_color[4:6], 16)
+
+    # print(r, g, b)
+    return (r, g, b)
+
+def rgb_to_hex(rgb: (int, int, int)) -> str:
+    if not isinstance(rgb, tuple) or len(rgb) != 3:
+        raise ValueError("Input must be a tuple of three integers (R, G, B)")
+
+    r, g, b = rgb
+
+    if not all(0 <= color <= 255 for color in (r, g, b)):
+        raise ValueError("RGB values must be integers in the range 0-255")
+
+    hex_color = "#{:02x}{:02x}{:02x}".format(r, g, b)
+    return hex_color.upper()
+
+def validate_color_scheme(color_scheme: dict):
+    missing = [c for c in CFG_KEYS if c not in color_scheme]
+    if len(missing) != 0:
+        print(f"Missing colors in theme: [{' '.join(missing)}]")
+        sys.exit(1)
+
+
+def load_from_name(name: str) -> dict:
+    theme_path = f"/home/{USER}/.config/theme_switcher/themes/{name}.json"
+    theme_file = Path(theme_path)
+    if not theme_file.is_file():
+        print(f"No file for theme '{name}' found, expected '{theme_path}'")
+        sys.exit(1)
+    
+    with open(theme_path) as f:
+        color_scheme = json.loads(f.read())
+    # color_scheme = {k: hex_to_rgb(color_scheme[k]) for k in color_scheme}
+
+    validate_color_scheme(color_scheme)
+    return color_scheme
+
+
+def apply_color_scheme(template_path: str, color_scheme: dict):
+    theme_file = Path(template_path)
+    if not theme_file.is_file():
+        print(f"File not found: '{theme_file}'")
+        sys.exit(1)
+
+    out_path = template_path.replace('/theme_switcher/templates', '')
+    out_file = Path(out_path)
+    if not out_file.is_file():
+        print(f"File not found: '{out_file}'")
+        sys.exit(1)
+
+    # print(f"From '{template_path}' to '{out_path}'")
+    with open(template_path) as f:
+        tpl = Template(f.read())
+    
+    if out_path in ALT_FORMAT_FILES:
+        color_scheme = {
+                k: color_scheme[k] if k not in COLORS else f"rgb({color_scheme[k][1:]})" 
+                for k in color_scheme
+        }
+    with open(out_path, 'w') as f:
+        f.write(tpl.safe_substitute(color_scheme))
+
+
+def create_bg(width: int, height: int, color_scheme: dict, color_scheme_name: str):
+    PPMheader = 'P6\n' +str(width) + ' ' +str(height) + '\n255\n'
+
+    # print(color_scheme['bg'])
+    image = array.array('B', hex_to_rgb(color_scheme['bg']) * width * height)
+
+    with open(f'/tmp/{color_scheme_name}.ppm', 'wb') as f:
+        f.write(bytearray(PPMheader, 'ascii'))
+        image.tofile(f)
+
+    # convert result.ppm -auto-level image.png
+    subprocess.run(f"magick /tmp/{color_scheme_name}.ppm /home/{USER}/.config/theme_switcher/backgrounds/{color_scheme_name}.png".split())
+
+def set_gtk_theme(color_scheme: dict):
+    is_light = "prefer-light" if color_scheme["light_theme"] else "prefer-dark"
+    
+
+    print(f"gsettings set org.gnome.desktop.interface gtk-theme '{color_scheme['gtk_theme']}'")
+    print(f"gsettings set org.gnome.desktop.wm.preferences theme '{color_scheme['gtk_theme']}'")
+    print(f"gsettings set org.gnome.desktop.interface color-scheme '{is_light}'")
+
+    subprocess.run(f"gsettings set org.gnome.desktop.interface gtk-theme '{color_scheme['gtk_theme']}'".split())
+    subprocess.run(f"gsettings set org.gnome.desktop.wm.preferences theme '{color_scheme['gtk_theme']}'".split())
+    subprocess.run(f"gsettings set org.gnome.desktop.interface color-scheme '{is_light}'".split())
+
+def change_bg(bg_file: str):
+    subprocess.run(f"hyprctl hyprpaper preload {bg_file}".split(), 
+                   # stderr=subprocess.STDOUT
+                   )
+    subprocess.run(f"hyprctl hyprpaper wallpaper eDP-1,{bg_file}".split(), 
+                   # stderr=subprocess.STDOUT
+                   )
+
+def main(color_scheme_name: str):
+    color_scheme = load_from_name(color_scheme_name)
+    bg_path = f"/home/{USER}/.config/theme_switcher/backgrounds/{color_scheme_name}.png"
+    color_scheme["bg_file"] = bg_path
+
+    set_gtk_theme(color_scheme)
+
+    for dir_, _, files in os.walk(f"/home/{USER}/.config/theme_switcher/templates"):
+        for file in files:
+            path = f"{dir_}/{file}"
+            apply_color_scheme(path, color_scheme)
+
+    bg_file = Path(bg_path)
+    if not bg_file.is_file():
+        create_bg(1920, 1200, color_scheme, color_scheme_name)
+    change_bg(bg_path)
+
+    subprocess.run("killall -SIGUSR2 waybar".split())
+    subprocess.run("killall dunst".split())
+
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print(f"Usage: python {sys.argv[0]} <theme name>")
+        sys.exit(1)
+
+    main(sys.argv[1])

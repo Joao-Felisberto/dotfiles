@@ -1,0 +1,30 @@
+[font]
+size = 18
+
+[font.normal]
+family = "SourceCodePro"
+style = "Medium"
+
+[colors.primary]
+background = "$bg"
+foreground = "$fg"
+
+[colors.normal]
+black = "$black"
+red = "$red"
+green = "$green"
+yellow = "$yellow"
+blue = "$blue"
+magenta = "$magenta"
+cyan = "$cyan"
+white = "$white"
+
+[colors.bright]
+black = "$d_black"
+red = "$d_red"
+green = "$d_green"
+yellow = "$d_yellow"
+blue = "$d_blue"
+magenta = "$d_magenta"
+cyan = "$d_cyan"
+white = "$d_white"
