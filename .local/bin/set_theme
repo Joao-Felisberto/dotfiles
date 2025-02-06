@@ -39,6 +39,7 @@ CFG_KEYS = (
 
 ALT_FORMAT_FILES = (
     f"/home/{USER}/.config/hypr/hyprland.conf",
+    f"/home/{USER}/.config/hypr/hyprlock.conf",
 )
 
 def hex_to_rgb(hex_color: str) -> (int, int, int):
